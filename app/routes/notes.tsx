@@ -22,14 +22,14 @@ export async function action({ request }: ActionFunctionArgs) {
     //     conent: formData.get('content')
     // }
     // OR
-    const noteData: any = Object.entries(formData);
+    const noteData: any = Object.fromEntries(formData);
     
     // now we can access users's input like noteData.title OR noteData.content
 
     // validation
-    const existingNote = await getStoredNotes();
+    const existingNotes = await getStoredNotes();
     noteData.id = Date.now();
-    const updateNotes = existingNote.concat(noteData);
+    const updateNotes = existingNotes.concat(noteData);
     await storeNotes(updateNotes);
     return redirect(endpoints.NOTES);
 }
