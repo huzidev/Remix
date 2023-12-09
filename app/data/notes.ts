@@ -1,10 +1,5 @@
 import fs from 'fs/promises';
-
-interface Notes {
-    id: number;
-    title: string;
-    content: string;
-}
+import { Notes } from './types';
 
 // create notes.json file at ROOT level beside package.json file
 

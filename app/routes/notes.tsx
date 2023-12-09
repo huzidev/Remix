@@ -1,5 +1,6 @@
 import type { ActionFunctionArgs } from "@remix-run/node";
 import NewNote from "~/components/Notes";
+import { getStoredNotes } from "~/data/notes";
 
 export default function NotesPage() {
   return (
@@ -20,6 +21,10 @@ export async function action({ request }: ActionFunctionArgs) {
     //     conent: formData.get('content')
     // }
     // OR
-    const noteData = Object.entries(formData);
+    const noteData: any = Object.entries(formData);
     // now we can access users's input like noteData.title OR noteData.content
+
+    // validation
+    const existingNote = await getStoredNotes();
+    noteData.id = Date.now();
 }
