@@ -1,4 +1,5 @@
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
+import { Link, useRouteError } from "@remix-run/react";
 import NewNote from "~/components/Notes/AddNotes";
 import ShowNotes from "~/components/Notes/ShowNotes";
 import { getStoredNotes, storeNotes } from "~/data/notes";
@@ -36,7 +37,9 @@ export async function action({ request }: ActionFunctionArgs) {
   // OR
   const noteData: any = Object.fromEntries(formData);
   if (noteData.title.trim().length <= 5) {
-    return { message: 'Invalid title - Title length must be greater than 5 characters' }
+    return {
+      message: "Invalid title - Title length must be greater than 5 characters",
+    };
   }
   // now we can access users's input like noteData.title OR noteData.content
   // validation
@@ -45,4 +48,15 @@ export async function action({ request }: ActionFunctionArgs) {
   const updateNotes = existingNotes.concat(noteData);
   await storeNotes(updateNotes);
   return redirect(endpoints.NOTES);
+}
+
+export function ErrorBoundary() {
+  const error: any = useRouteError();
+  return (
+    <>
+      <h1>An Error Occured - Related to notes</h1>
+      <p>{error?.message}</p>
+      <p>Go back to <Link to={endpoints.HOME}>Home Page</Link></p>
+    </>
+  );
 }
