@@ -1,6 +1,7 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import { redirect, type ActionFunctionArgs } from "@remix-run/node";
 import NewNote from "~/components/Notes";
-import { getStoredNotes } from "~/data/notes";
+import { getStoredNotes, storeNotes } from "~/data/notes";
+import * as endpoints from '~/endpoints/index';
 
 export default function NotesPage() {
   return (
@@ -27,4 +28,7 @@ export async function action({ request }: ActionFunctionArgs) {
     // validation
     const existingNote = await getStoredNotes();
     noteData.id = Date.now();
+    const updateNotes = existingNote.concat(noteData);
+    await storeNotes(updateNotes);
+    return redirect(endpoints.NOTES);
 }
