@@ -1,8 +1,12 @@
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 
+interface MessageType {
+  message: string;
+}
+
 export default function NewNote() {
   const navigation = useNavigation();
-  const message: string = useActionData();
+  const data: MessageType | undefined = useActionData();
   const isSubmitting: boolean = navigation.state === 'submitting';
 
   return (
@@ -11,6 +15,7 @@ export default function NewNote() {
     // also no need to define the action='/notes' because the request will be send to the current active path and this component
     // will be run on /notes path
     <Form method="post" id="note-form">
+      {data?.message && <p>{data.message}</p>}
       <p>
         <label htmlFor="title">Title</label>
         <input type="text" id="title" name="title" required />
