@@ -1,6 +1,9 @@
-import { Form } from "@remix-run/react";
+import { Form, useNavigation } from "@remix-run/react";
 
 export default function NewNote() {
+  const navigation = useNavigation();
+  const isSubmitting: boolean = navigation.state === 'submitting';
+
   return (
     // like in react we do onSubmit={submitHandler} and submitHandler function will prevent the event.preventDefault
     // no need for this in remix
@@ -16,7 +19,9 @@ export default function NewNote() {
         <textarea id="content" name="content" rows={5} required />
       </p>
       <div className="form-actions">
-        <button>Add Note</button>
+        <button disabled={isSubmitting}>
+          {isSubmitting ? 'Submitting...' : 'Add Note'}
+        </button>
       </div>
     </Form>
   );
