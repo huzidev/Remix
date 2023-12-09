@@ -6,6 +6,8 @@ interface Notes {
     content: string;
 }
 
+// create notes.json file at ROOT level beside package.json file
+
 export async function getStoredNotes() {
     const rawFile = await fs.readFile('notes.json', { encoding: 'utf-8' });
     const data = JSON.parse(rawFile);
