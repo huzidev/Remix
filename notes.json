@@ -1,1 +1,5 @@
-{"notes":[{"title":"First Note","content":"Hello, World!","id":1702139815664}]}
+{
+  "notes": [
+    { "title": "First Note", "content": "Hello, World!", "id": 1702139815664 }
+  ]
+}
