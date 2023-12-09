@@ -1,17 +1,14 @@
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
 import NewNote from "~/components/Notes/AddNotes";
 import ShowNotes from "~/components/Notes/ShowNotes";
 import { getStoredNotes, storeNotes } from "~/data/notes";
 import * as endpoints from "~/endpoints/index";
 
 export default function NotesPage() {
-  // just like useSelector hook of reduxJS
-  const notes = useLoaderData();
   return (
     <div>
       <NewNote />
-      <ShowNotes/>
+      <ShowNotes />
     </div>
   );
 }
@@ -38,9 +35,10 @@ export async function action({ request }: ActionFunctionArgs) {
   // }
   // OR
   const noteData: any = Object.fromEntries(formData);
-
+  if (noteData.title.trim().length <= 5) {
+    return { message: 'Invalid title - Title length must be greater than 5 characters' }
+  }
   // now we can access users's input like noteData.title OR noteData.content
-
   // validation
   const existingNotes = await getStoredNotes();
   noteData.id = Date.now();

@@ -1,7 +1,8 @@
-import { Form, useNavigation } from "@remix-run/react";
+import { Form, useActionData, useNavigation } from "@remix-run/react";
 
 export default function NewNote() {
   const navigation = useNavigation();
+  const message: string = useActionData();
   const isSubmitting: boolean = navigation.state === 'submitting';
 
   return (
