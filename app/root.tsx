@@ -26,6 +26,7 @@ export default function App() {
       </head>
       <body>
         <header>
+          {/* Show nav buttons at top on each page */}
           <MainNavigation />
         </header>
         <Outlet />
