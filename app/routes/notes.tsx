@@ -1,5 +1,6 @@
 import { redirect, type ActionFunctionArgs } from "@remix-run/node";
-import NewNote from "~/components/Notes";
+import NewNote from "~/components/Notes/AddNotes";
+import ShowNotes from "~/components/Notes/ShowNotes";
 import { getStoredNotes, storeNotes } from "~/data/notes";
 import * as endpoints from '~/endpoints/index';
 
@@ -7,8 +8,15 @@ export default function NotesPage() {
   return (
     <div>
       <NewNote />
+      <ShowNotes />
     </div>
   );
+}
+
+export async function loader() {
+    const notes = await getStoredNotes();
+    return notes;
+    // remix will do return new Response(JSON.stringify(notes), {headers: {'Content-Type': 'application/json'}}) for us just by using return notes
 }
 
 // just like links() function for CSS this remix will looks for this aciton function and this action function will runs for backend code

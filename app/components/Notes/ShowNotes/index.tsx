@@ -1,6 +1,6 @@
 import { Notes } from "~/data/types";
 
-export default function ShowNotes({ notes }) {
+export default function ShowNotes({ notes }: any) {
   return (
     <ul id="note-list">
       {notes.map((note: Notes, index: number) => (
