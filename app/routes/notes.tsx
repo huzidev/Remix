@@ -11,7 +11,7 @@ export default function NotesPage() {
   return (
     <div>
       <NewNote />
-      <ShowNotes notes={notes}/>
+      <ShowNotes/>
     </div>
   );
 }

@@ -20,7 +20,7 @@ export default function NewNote() {
       </p>
       <div className="form-actions">
         <button disabled={isSubmitting}>
-          {isSubmitting ? 'Submitting...' : 'Add Note'}
+          {isSubmitting ? 'Adding...' : 'Add Note'}
         </button>
       </div>
     </Form>
