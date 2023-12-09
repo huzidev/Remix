@@ -23,6 +23,7 @@ export async function action({ request }: ActionFunctionArgs) {
     // }
     // OR
     const noteData: any = Object.entries(formData);
+    
     // now we can access users's input like noteData.title OR noteData.content
 
     // validation
