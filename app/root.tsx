@@ -29,8 +29,8 @@ export default function App() {
           {/* Show nav buttons at top on each page */}
           <MainNavigation />
         </header>
-        {/* for ours ErrorBoundary in Notes.tsx the error will be received here in the <Outlet /> */}
-        <Outlet /> 
+        {/* This <Outlet /> will receive error from Notes.jsx page if any error occured */}
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
