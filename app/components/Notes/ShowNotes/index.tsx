@@ -8,8 +8,8 @@ export default function ShowNotes() {
   return (
     <ul id="note-list">
       {notes.map((note: Notes, index: number) => (
-        <Link to={note.id.toString()}>
-          <li key={note.id} className="note" style={{cursor: "pointer"}}>
+        <li key={note.id} className="note" style={{ cursor: "pointer" }}>
+          <Link to={note.id.toString()}>
             <article>
               <header>
                 <ul className="note-meta">
@@ -19,8 +19,8 @@ export default function ShowNotes() {
               </header>
               <p>{note.content}</p>
             </article>
-          </li>
-        </Link>
+          </Link>
+        </li>
       ))}
     </ul>
   );

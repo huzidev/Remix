@@ -5,7 +5,7 @@ import { Notes } from './types';
 export async function getStoredNotes(id?: number) {
     const rawFile = await fs.readFile('notes.json', { encoding: 'utf-8' });
     const data = JSON.parse(rawFile);
-    const response = (id ? data.notes.find((val: Notes) => val.id) : data.notes) ?? [];
+    const response = (id ? data.notes.find((val: Notes) => val.id === id) : data.notes) ?? [];
     return response;
 }
 
