@@ -1,5 +1,5 @@
 import { json, redirect, type ActionFunctionArgs } from "@remix-run/node";
-import { Link, useRouteError } from "@remix-run/react";
+import { Link, isRouteErrorResponse, useRouteError } from "@remix-run/react";
 import NewNote from "~/components/Notes/AddNotes";
 import ShowNotes from "~/components/Notes/ShowNotes";
 import { getStoredNotes, storeNotes } from "~/data/notes";
@@ -16,13 +16,13 @@ export default function NotesPage() {
 
 // loader is used to get data from database to show it on ours front-end page
 export async function loader() {
-  const notes = await getStoredNotes(); 
-  // Custom Error Handling
+  const notes = await getStoredNotes();
+  // Custom Error Handling and this will be received by isRouteErrorResponse() in ErrorBoundary
   if (!notes || !notes.length) {
     throw json(
-      {message: 'No Notes were found!'},
-      {status: 404, statusText: 'Not Found!'}
-    )
+      { message: "No Notes were founds!" },
+      { status: 404, statusText: "Not Found!" }
+    );
   }
   return notes;
   // OR
@@ -49,7 +49,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
   // now we can access users's input like noteData.title OR noteData.content
   // validation
-  const existingNotes = await getStoredNotes(); 
+  const existingNotes = await getStoredNotes();
   noteData.id = Date.now();
   const updateNotes = existingNotes.concat(noteData);
   await storeNotes(updateNotes);
@@ -57,12 +57,26 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 export function ErrorBoundary() {
-  const error: any = useRouteError();
+  const error = useRouteError();
   return (
     <>
-      <h1>An Error Occured - Related to notes</h1>
-      <p>{error?.message}</p>
-      <p>Go back to <Link to={endpoints.HOME}>Home Page</Link></p>
+      {isRouteErrorResponse(error) && (
+        <div>
+          <h1>
+            {error.status} {error.statusText}
+          </h1>
+          <p>{error.data?.message}</p>
+        </div>
+      )}
+      {error instanceof Error && (
+        <>
+          <h1>An Error Occured - Related to notes</h1>
+          <p>{error?.message}</p>
+          <p>
+            Go back to <Link to={endpoints.HOME}>Home Page</Link>
+          </p>
+        </>
+      )}
     </>
   );
 }
