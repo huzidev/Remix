@@ -14,7 +14,7 @@ export default function NotePage() {
   );
 }
 
-export async function loader(id: number) {
-  const note = await getStoredNotes(id);
+export async function loader({ params }: any) {
+  const note = await getStoredNotes(params);
   return note;
 }

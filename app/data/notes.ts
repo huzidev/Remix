@@ -2,10 +2,10 @@ import fs from 'fs/promises';
 import { Notes } from './types';
 
 // create notes.json file at ROOT level beside package.json file
-export async function getStoredNotes(id?: number) {
+export async function getStoredNotes(id?: any) {
     const rawFile = await fs.readFile('notes.json', { encoding: 'utf-8' });
     const data = JSON.parse(rawFile);
-    const response = (id ? data.notes.find((val: Notes) => val.id === id) : data.notes) ?? [];
+    const response = (id ? data.notes.find((val: Notes) => val.id === parseInt(id?.noteId)) : data.notes) ?? [];
     return response;
 }
 
