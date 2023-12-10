@@ -17,6 +17,10 @@ export default function NotesPage() {
 // loader is used to get data from database to show it on ours front-end page
 export async function loader() {
   const notes = await getStoredNotes(); 
+  // Custom Error Handling
+  if (!notes || !notes.length) {
+    
+  }
   return notes;
   // OR
   // return json(notes); BUT import json from "@remix-run/node";
