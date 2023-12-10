@@ -1,4 +1,4 @@
-import { redirect, type ActionFunctionArgs } from "@remix-run/node";
+import { json, redirect, type ActionFunctionArgs } from "@remix-run/node";
 import { Link, useRouteError } from "@remix-run/react";
 import NewNote from "~/components/Notes/AddNotes";
 import ShowNotes from "~/components/Notes/ShowNotes";
@@ -19,7 +19,10 @@ export async function loader() {
   const notes = await getStoredNotes(); 
   // Custom Error Handling
   if (!notes || !notes.length) {
-    
+    throw json(
+      {message: 'No Notes were found!'},
+      {status: 404, statusText: 'Not Found!'}
+    )
   }
   return notes;
   // OR
