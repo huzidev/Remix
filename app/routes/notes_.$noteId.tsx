@@ -1,3 +1,4 @@
+import { LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getStoredNotes } from "~/data/notes";
 import { Notes } from "~/data/types";
@@ -14,7 +15,7 @@ export default function NotePage() {
   );
 }
 
-export async function loader({ params }: any) {
+export async function loader({ params }: LoaderFunctionArgs) {
   const note = await getStoredNotes(params);
   return note;
 }
