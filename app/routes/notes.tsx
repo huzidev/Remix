@@ -16,11 +16,10 @@ export default function NotesPage() {
 
 // loader is used to get data from database to show it on ours front-end page
 export async function loader() {
-  const notes = await getStoredNotes();
+  const notes = await getStoredNotes(); 
   return notes;
   // OR
-  // BUT import json from "@remix-run/node";
-  // return json(notes);
+  // return json(notes); BUT import json from "@remix-run/node";
   // remix will do return new Response(JSON.stringify(notes), {headers: {'Content-Type': 'application/json'}}) for us just by using return notes
 }
 
@@ -43,7 +42,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
   // now we can access users's input like noteData.title OR noteData.content
   // validation
-  const existingNotes = await getStoredNotes();
+  const existingNotes = await getStoredNotes(); 
   noteData.id = Date.now();
   const updateNotes = existingNotes.concat(noteData);
   await storeNotes(updateNotes);
