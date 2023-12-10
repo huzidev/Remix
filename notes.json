@@ -1,15 +1,1 @@
-{
-  "notes": [
-    { "title": "First Note", "content": "Hello, World!", "id": 1702139815664 },
-    {
-      "title": "Second Note",
-      "content": "Here is the Second Note",
-      "id": 1702141460903
-    },
-    {
-      "title": "Third Note",
-      "content": "Adding third note",
-      "id": 1702144570376
-    }
-  ]
-}
+{"notes":[{"title":"First Note","content":"Hello, World!","id":1702139815664},{"title":"Second Note","content":"Here is the Second Note","id":1702141460903},{"title":"Third Note","content":"Adding third note","id":1702144570376},{"title":"4th note","content":"Hello this is 4ht note","id":1702199833767}]}
