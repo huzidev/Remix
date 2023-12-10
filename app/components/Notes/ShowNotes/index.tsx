@@ -1,4 +1,4 @@
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import { Notes } from "~/data/types";
 
 export default function ShowNotes() {
@@ -8,17 +8,19 @@ export default function ShowNotes() {
   return (
     <ul id="note-list">
       {notes.map((note: Notes, index: number) => (
-        <li key={note.id} className="note">
-          <article>
-            <header>
-              <ul className="note-meta">
-                <li>#{index + 1}</li>
-              </ul>
-              <h2>{note.title}</h2>
-            </header>
-            <p>{note.content}</p>
-          </article>
-        </li>
+        <Link to={note.id.toString()}>
+          <li key={note.id} className="note" style={{cursor: "pointer"}}>
+            <article>
+              <header>
+                <ul className="note-meta">
+                  <li>#{index + 1}</li>
+                </ul>
+                <h2>{note.title}</h2>
+              </header>
+              <p>{note.content}</p>
+            </article>
+          </li>
+        </Link>
       ))}
     </ul>
   );

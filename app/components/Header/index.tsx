@@ -11,7 +11,8 @@ export default function MainNavigation() {
           <NavLink to={endpoints.HOME}>Home</NavLink>
         </li>
         <li className="nav-item">
-          <NavLink to={endpoints.NOTES}>Notes</NavLink>;
+          {/* <NavLink to={endpoints.NOTES}>Notes</NavLink> */}
+          <NavLink to={endpoints.NOTES}>Notes</NavLink>
         </li>
       </ul>
     </div>
